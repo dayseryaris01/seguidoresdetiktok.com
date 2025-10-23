@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="Icon" href="imagenes/dy.jpg">
+  <title>Crece con Dayser</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0px;
+      padding: 0px;
+      background: linear-gradient(135deg, #ff0050, #000000);
+      color: white;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: #111;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      left: 20px;  
+      width: 60px;  
+      height: auto;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 5px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1);
+      background: #ff0050;
+    }
+
+    header a {
+      text-decoration: none;
+    }
+
+    .header-text {
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #ff0050;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: #222;
+      padding: 1rem;
+      border-radius: 50px;
+      text-align: center;
+    }
+
+    .card h3 {
+      color: #ff0050;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    button {
+      background: #ff0050;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e60045;
+    }
+
+    #carrito-icono {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #ff0050;
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    #contador-carrito {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #25d366;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 3px 7px;
+    }
+
+    #carrito {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 320px;
+      height: 100%;
+      background: #111;
+      color: white;
+      padding: 1rem;
+      transition: right 0.3s ease;
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    #carrito.open {
+      right: 0;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .cart-item input {
+      width: 60px;
+      text-align: center;
+      margin: 0 5px;
+    }
+
+    .cart-item button {
+      background: red;
+      border: none;
+      color: white;
+      padding: 0 6px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      position: fixed;
+      z-index: 2000;
+      right: 20px;
+      bottom: 30px;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s, bottom 0.5s;
+    }
+
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+
+    .toast-success {
+      background-color: #25d366;
+    }
+
+    .toast-error {
+      background-color: #ff4444;
+    }
+
+    footer {
+      background: black;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    footer h3 {
+      margin-top: 0;
+      color: #ff0050;
+    }
+
+    footer a:hover {
+      color: #ff0050;
+    }
+
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 24px;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: red;
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="https://www.tiktok.com/@dayser.01?is_from_webapp=1&sender_device=pc" target="_blank">
+    <img src="imagenes/dy.jpg" alt="Logo" class="logo">
+  </a>
+  <div class="header-text">
+    <h1>Tienda de Tiktok 🚀</h1>
+    <p>Compra seguidores, vistas, likes y membresías exclusivas</p>
+  </div>
+</header>
+
+<div class="container">
+  <h2>📈 Servicios Personalizados</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagen de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Seguidores</h3>
+      <p>1,000 seguidores = $7</p>
+      <input type="number" id="seguidores" placeholder="Mínimo 500 seguidores" min="500" step="500" oninput="calcularPrecio('seguidores',7)">
+      <p id="precio-seguidores">Precio: $0.00</p>
+      <button onclick="agregarServicio('Seguidores', 7, 'seguidores')">Agregar</button>
+    </div>
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagen de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Vistas</h3>
+      <p>1,000 vistas = $1</p>
+      <input type="number" id="vistas" placeholder="Mínimo 500 vistas" min="500" step="500" oninput="calcularPrecio('vistas',1)">
+      <p id="precio-vistas">Precio: $0.00</p>
+      <button onclick="agregarServicio('Vistas', 1, 'vistas')">Agregar</button>
+    </div>
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagen de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Likes</h3>
+      <p>1,000 likes = $4</p>
+      <input type="number" id="likes" placeholder="Mínimo 500 likes" min="500" step="500" oninput="calcularPrecio('likes',4)">
+      <p id="precio-likes">Precio: $0.00</p>
+      <button onclick="agregarServicio('Likes', 4, 'likes')">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Membresías -->
+<div class="container">
+  <h2>🌟 Membresías Mensuales</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagenes de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Basico</h3>
+      <p>✔ 5,000 Seguidores / mes</p>
+      <p>✔ 5,000 Vistas / mes</p>
+      <p>✔ 5,000 Likes / mes</p>
+      <p class="price">$55 / mes</p>
+      <button onclick="agregarMembresia('Starter', 55)">Agregar</button>
+    </div>
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagenes de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Creativo</h3>
+      <p>✔ 7,000 Seguidores / mes</p>
+      <p>✔ 10,000 Vistas / mes</p>
+      <p>✔ 5,000 Likes / mes</p>
+      <p class="price">$80 / mes</p>
+      <button onclick="agregarMembresia('Pro', 80)">Agregar</button>
+    </div>
+    <div class="card">
+      <img src="imagenes/tiktok.jpeg" alt="Imagenes de tiktok" style="width: 250px; border-radius:10px; margin-bottom:10px;">
+      <h3>Exclusivo</h3>
+      <p>✔ 15,000 Seguidores / mes</p>
+      <p>✔ 15,000 Vistas / mes</p>
+      <p>✔ 15,000 Likes / mes</p>
+      <p class="price">$170 / mes</p>
+      <button onclick="agregarMembresia('Elite', 170)">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div id="carrito-icono" onclick="toggleCarrito()">
+  🛒
+  <span id="contador-carrito">0</span>
+</div>
+
+<div id="carrito">
+  <h2>Tu Carrito</h2>
+  <div id="lista-carrito"></div>
+  <p>Total: $<span id="total">0.00</span></p>
+  <button onclick="pagarWhatsApp()">Pagar ahora</button>
+</div>
+
+<div id="toast"></div>
+
+<footer>
+  <h3>📞 Contacto</h3>
+  <p>Teléfono: <a href="tel:+584123947148" style="color:#00f2ea;">+58 412 394 7148</a></p>
+  <p>Email: <a href="mailto:dayseryaris01@gmail.com" style="color:#00f2ea;">dayseryaris01@gmail.com</a></p>
+  
+  <div class="social-icons">
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-youtube"></i></a>
+  </div>
+
+  <p>&copy; 2025 TikTok Boost Store - Todos los derechos reservados</p>
+</footer>
+
+<script>
+  let carrito = [];
+  let total = 0;
+
+  function toggleCarrito() {
+    document.getElementById("carrito").classList.toggle("open");
+  }
+
+  function renderCarrito() {
+    const lista = document.getElementById("lista-carrito");
+    lista.innerHTML = "";
+    carrito.forEach((item, index) => {
+      let div = document.createElement("div");
+      div.classList.add("cart-item");
+      
+      if(item.tipo === "membresia") {
+        div.innerHTML = `
+          <span>${item.producto} - $${item.precio.toFixed(2)}</span>
+          <button onclick="eliminarDelCarrito(${index})">X</button>
+        `;
+      } else {
+        div.innerHTML = `
+          <span>${item.producto}</span>
+          <input type="number" min="500" step="500" value="${item.cantidad}" onchange="editarCantidad(${index}, this.value)">
+          <span>$${item.precio.toFixed(2)}</span>
+          <button onclick="eliminarDelCarrito(${index})">X</button>
+        `;
+      }
+
+      lista.appendChild(div);
+    });
+    document.getElementById("total").textContent = total.toFixed(2);
+    document.getElementById("contador-carrito").textContent = carrito.length;
+  }
+
+  function mostrarToast(mensaje, tipo = "success") {
+    const toast = document.getElementById("toast");
+    toast.textContent = mensaje;
+    toast.className = "show";
+    if (tipo === "success") toast.classList.add("toast-success");
+    if (tipo === "error") toast.classList.add("toast-error");
+
+    setTimeout(() => {
+      toast.className = toast.className.replace("show", "");
+    }, 3000);
+  }
+
+  function calcularPrecio(tipo, costo) {
+    let cantidad = parseInt(document.getElementById(tipo).value) || 0;
+    let precio = (cantidad / 1000) * costo;
+    document.getElementById(`precio-${tipo}`).textContent = `Precio: $${precio.toFixed(2)}`;
+  }
+
+  // ✅ Mínimo 500 unidades
+  function agregarServicio(nombre, costo, inputId) {
+    let cantidad = parseInt(document.getElementById(inputId).value);
+    if (isNaN(cantidad) || cantidad < 500) {
+      mostrarToast("❌ Debes comprar al menos 500 unidades por servicio", "error");
+      return;
+    }
+    let precio = (cantidad / 1000) * costo;
+    carrito.push({producto: `${cantidad} ${nombre}`, cantidad, costo, precio, tipo: "servicio", nombre});
+    total += precio;
+    renderCarrito();
+    mostrarToast(`✅ ${cantidad} ${nombre} agregados al carrito`, "success");
+  }
+
+  function agregarMembresia(nombre, precio) {
+    carrito.push({producto: `Membresía ${nombre}`, precio: precio, tipo: "membresia"});
+    total += precio;
+    renderCarrito();
+    mostrarToast(`✅ Membresía ${nombre} agregada al carrito`, "success");
+  }
+
+  function editarCantidad(index, nuevaCantidad) {
+    nuevaCantidad = parseInt(nuevaCantidad);
+    if (nuevaCantidad < 500) {
+      mostrarToast("❌ Debes comprar al menos 500 unidades por servicio", "error");
+      return;
+    }
+    let item = carrito[index];
+    total -= item.precio;
+    item.cantidad = nuevaCantidad;
+    item.precio = (nuevaCantidad / 1000) * item.costo;
+    item.producto = `${nuevaCantidad} ${item.nombre}`;
+    total += item.precio;
+    renderCarrito();
+    mostrarToast(`✏️ Cantidad actualizada a ${nuevaCantidad} ${item.nombre}`, "success");
+  }
+
+  function eliminarDelCarrito(index) {
+    total -= carrito[index].precio;
+    carrito.splice(index, 1);
+    renderCarrito();
+    mostrarToast("❌ Producto eliminado del carrito", "error");
+  }
+
+  function pagarWhatsApp() {
+    let mensaje = "Hola, quiero completar mi compra:%0A";
+    carrito.forEach(item => {
+      mensaje += `- ${item.producto}: $${item.precio.toFixed(2)}%0A`;
+    });
+    mensaje += `Total: $${total.toFixed(2)}`;
+    window.open(`https://wa.me/584129051756?text=${mensaje}`, "_blank");
+  }
+</script>
+
+</body>
+</html>
